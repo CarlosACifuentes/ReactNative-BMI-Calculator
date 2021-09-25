@@ -5,7 +5,7 @@ import {TextInput, Text, View, Button, StyleSheet, Switch} from 'react-native';
 export default function calculateBMI() {
   const [height, heightReceived] = React.useState('0');
   const [weight, onWeightReceived] = React.useState('0');
-  const [BMI, onCalculateBMI] = React.useState('0');
+  const [BMI, onCalculateBMI] = React.useState('');
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -14,7 +14,7 @@ export default function calculateBMI() {
 
       <View style = {styles.header}><Text style = {styles.title}>BMI Calculator</Text></View>
 
-      <Text style = {styles.description}>Select between SI(kg,cm) and Metric(lb, in) by switching the toggle below.</Text>
+      <Text style = {styles.description}>Select SI(kg,cm) or Metric(lb,in) by switching the toggle below.</Text>
 
       <Switch
         ios_backgroundColor="#fff"
@@ -24,7 +24,7 @@ export default function calculateBMI() {
         value={isEnabled}
       />
 
-      <Text style = {styles.text}>{isEnabled ? 'System selected: SI' : 'System selected: Metric'}</Text>
+      <Text style = {styles.systemSelected}>{isEnabled ? 'System selected: SI' : 'System selected: Metric'}</Text>
 
       <Text style = {styles.text}>
         {isEnabled ? 'Enter your height (cm):' : 'Enter your height (in):'}
@@ -65,16 +65,17 @@ export default function calculateBMI() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: '#36485f',
-    alignItems: "center",
+    alignItems: 'center',
+    paddingTop: 90,
     paddingLeft: 50,
     paddingRight: 50,
   },
   header: {
     alignSelf:'stretch',
-    paddingBottom: 10,
-    marginBottom: 30,
+    paddingBottom: 15,
+    marginBottom: 20,
     borderBottomColor: '#f8f8f8',
     borderBottomWidth: 1,
   },
@@ -87,7 +88,15 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     fontSize: 16,
     color: '#fff',
-    paddingBottom: 5,
+    paddingBottom: 10,
+    
+  },
+  systemSelected: {
+    fontSize: 13,
+    color: '#fff',
+    paddingBottom: 25,
+    paddingTop: 10,
+    fontWeight: 'bold'
   },
   text: {
     alignSelf: 'stretch',
@@ -103,15 +112,15 @@ const styles = StyleSheet.create({
     borderColor: '#59cbbd', 
     borderWidth: 2,
     color: '#fff',
-    paddingStart: 5,
+    paddingStart: 10,
   },
   buttonView: {
-      alignSelf: 'stretch',
+      //alignSelf: 'stretch',
       alignItems: 'center',
       backgroundColor: '#59cbbd',
-      padding:10,
-      marginTop: 15,
-    
+      padding:5,
+      marginTop: 20,
+      marginBottom: 20,
   },
 
 
