@@ -1,112 +1,87 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, {Component, useState} from 'react';
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {TextInput, Text, View, Button, StyleSheet, Switch} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default function calculateBMI() {
+  const [height, heightReceived] = React.useState('0');
+  const [weight, onWeightReceived] = React.useState('0');
+  const [BMI, onCalculateBMI] = React.useState('0');
+  const [isEnabled, setIsEnabled] = useState(true);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
+    <View style={styles.container}>
+
+      <View style = {styles.header}><Text style = {styles.title}>BMI Calculator</Text></View>
+
+      <Text style = {styles.description}>BMI Calculator</Text>
+
+      <Switch
+        trackColor={{false: '#767577', true: '#81b0ff'}}
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+
+      <Text>{isEnabled ? 'SI' : 'Metric'}</Text>
+
+      <Text>
+        {isEnabled ? 'Enter your height (cm):' : 'Enter your height (in):'}
       </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
+
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={text => heightReceived(text)}
+        value={height}
+        clearTextOnFocus="true"
+      />
+      <Text>
+        {isEnabled ? 'Enter your weight (kg):' : 'Enter your weight (lb):'}
       </Text>
+
+      <TextInput
+        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        onChangeText={text2 => onWeightReceived(text2)}
+        value={weight}
+        clearTextOnFocus="true"
+      />
+
+      <Button
+        title="Calculate"
+        onPress={() => {
+          isEnabled
+            ? onCalculateBMI(weight / ((height / 100) * (height / 100)))
+            : onCalculateBMI((weight / (height * height)) * 703);
+        }}
+      />
+      <Text>Your BMI is: {BMI}</Text>
     </View>
   );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#36485f',
+    //alignItems: "center",
+    paddingLeft: 50,
+    paddingRight: 50,
   },
-  sectionTitle: {
+  header: {
+    paddingBottom: 10,
+    marginBottom: 40,
+    borderBottomColor: '#f8f8f8',
+    borderBottomWidth: 1,
+  },
+  title: {
+    alignSelf: 'stretch',
     fontSize: 24,
-    fontWeight: '600',
+    color: '#fff',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  description: {
+    fontSize: 15,
+    color: '#fff',
+    paddingBottom: 10,
   },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
-export default App;
+});
