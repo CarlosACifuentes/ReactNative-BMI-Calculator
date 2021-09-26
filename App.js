@@ -14,18 +14,18 @@ export default function calculateBMI() {
 
       <View style = {styles.header}><Text style = {styles.title}>BMI Calculator</Text></View>
 
-      <Text style = {styles.description}>Select SI(kg,cm) or Metric(lb,in) by switching the toggle below.</Text>
-
-      <Switch
-        ios_backgroundColor="#fff"
-        trackColor={{false: '#fff', true: '#233237'}}
-        thumbColor={isEnabled ? "#fff" : "#233237"}
-        onValueChange={toggleSwitch}
-        value={isEnabled}
-      />
-
-      <Text style = {styles.systemSelected}>{isEnabled ? 'System selected: SI' : 'System selected: Metric'}</Text>
-
+      <View style = {styles.switch}>
+        <Text style = {styles.systemSelected}>(in,lb)</Text>
+        <Switch
+          ios_backgroundColor="#fff"
+          trackColor={{false: '#fff', true: '#233237'}}
+          thumbColor={isEnabled ? "#fff" : "#233237"}
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+        <Text style = {styles.systemSelected}>(cm,kg)</Text>
+      </View>
+      
       <Text style = {styles.text}>
         {isEnabled ? 'Enter your height (cm):' : 'Enter your height (in):'}
       </Text>
@@ -59,14 +59,12 @@ export default function calculateBMI() {
       </View>
 
       <Text style = {styles.text}>Your BMI is: {BMI}</Text>
-
-
       <View style = {styles.categoriesView}>
-      <Text style = {styles.subtitle}>BMI Categories</Text>
-      <Text style = {styles.categories}>Underweight = 18.4 or less</Text>
-      <Text style = {styles.categories}>Normal weight = 18.5 – 24.9</Text>
-      <Text style = {styles.categories}>Overweight = 25 – 29.9</Text>
-      <Text style = {styles.categories}>Obesity = 30 or greater</Text>
+          <Text style = {styles.subtitle}>BMI Categories</Text>
+          <Text style = {styles.categories}>Underweight = 18.4 or less</Text>
+          <Text style = {styles.categories}>Normal weight = 18.5 – 24.9</Text>
+          <Text style = {styles.categories}>Overweight = 25 – 29.9</Text>
+          <Text style = {styles.categories}>Obesity = 30 or greater</Text>
       </View>
     </View>
   );
@@ -75,10 +73,9 @@ export default function calculateBMI() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     backgroundColor: '#36485f',
     alignItems: 'center',
-    paddingTop: 50,
     paddingLeft: 50,
     paddingRight: 50,
   },
@@ -99,14 +96,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     paddingBottom: 10,
-    
+  },
+  switch: {
+    flexDirection: "row",
+    marginTop: 5,
   },
   systemSelected: {
-    fontSize: 13,
+    fontSize: 15,
     color: '#fff',
     paddingBottom: 25,
-    paddingTop: 10,
-    fontWeight: 'bold'
+    paddingTop: 9,
+    fontWeight: 'bold',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   text: {
     alignSelf: 'stretch',
