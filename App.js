@@ -57,7 +57,17 @@ export default function calculateBMI() {
         }}
       />
       </View>
+
       <Text style = {styles.text}>Your BMI is: {BMI}</Text>
+
+
+      <View style = {styles.categoriesView}>
+      <Text style = {styles.subtitle}>BMI Categories</Text>
+      <Text style = {styles.categories}>Underweight = 18.4 or less</Text>
+      <Text style = {styles.categories}>Normal weight = 18.5 – 24.9</Text>
+      <Text style = {styles.categories}>Overweight = 25 – 29.9</Text>
+      <Text style = {styles.categories}>Obesity = 30 or greater</Text>
+      </View>
     </View>
   );
 }
@@ -115,13 +125,35 @@ const styles = StyleSheet.create({
     paddingStart: 10,
   },
   buttonView: {
-      //alignSelf: 'stretch',
       alignItems: 'center',
       backgroundColor: '#59cbbd',
       padding:5,
       marginTop: 20,
       marginBottom: 20,
   },
-
+  subtitle: {
+    alignSelf: 'center',
+    fontSize: 16,
+    color: '#fff',
+    paddingBottom: 10,
+    paddingTop: 10,
+    fontWeight: 'bold',
+  },
+  categories: {
+    fontSize: 15,
+    color: '#fff',
+    paddingBottom: 5,
+  },
+  categoriesView: {
+    alignSelf:'stretch',
+    fontSize: 15,
+    color: '#fff',
+    paddingBottom: 10,
+    borderTopColor: '#fff',
+    borderTopWidth: 1,
+    marginTop: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: '#fff',
+  },
 
 });
