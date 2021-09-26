@@ -1,3 +1,10 @@
+/*
+  Author: Carlos Cifuentes
+  Student ID: 301140805
+  Code updated: 25 Sept 2021
+  Course: MAPD712 - Web Techs - Mobile Platforms
+ */
+
 import React, {Component, useState} from 'react';
 
 import {TextInput, Text, View, Button, StyleSheet, Switch} from 'react-native';
